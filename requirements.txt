@@ -1,7 +1,9 @@
 keras==2.8.0
-matplotlib==3.5.1
-numpy==1.22.3
+keras_nightly==2.7.0.dev2021081807
+matplotlib==3.5.0
+numpy==1.21.2
 Pillow==9.0.1
 requests==2.27.1
-streamlit==1.8.0
+streamlit==1.5.0
 tensorflow==2.8.0
+tf_nightly==2.7.0.dev20210818

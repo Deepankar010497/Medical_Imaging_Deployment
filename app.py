@@ -12,8 +12,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 # Importing all required libraries
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.applications.inception_v3 import InceptionV3
 from keras.preprocessing.image import load_img, img_to_array, array_to_img
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -26,11 +24,41 @@ import re
 
 
 st.title("Bone Class Image Classifier")
-st.text("Please provide the bone url for bone class image classification.")
+#Add sidebar to the app
+st.sidebar.markdown("### Welcome to my Bone Classifier Web App")
+st.sidebar.markdown("Hi! I am Deepankar. This web app serves purpose of classifying bones into three major categories. This web app is developed keeping in mind for faster screening of medical records for taking further necessary steps. Working in backend is a computer vision deep learning algorithm for serving your purpose. Enjoy!")
+st.markdown("#### There are three class for prediction:")
+st.markdown("- Healthy Bones")
+st.markdown("- Fractured Bones")
+st.markdown("- Bones Needing Prolong Treatment Or Beyond Repair")
+st.markdown("#### Glimpses of each class:")
+
+# Images
+col1, col2, col3 = st.columns(3)
+
+healthy_img = Image.open("Images/healthy_bones_show.jpg")
+#col1.header("Healthy Bones")
+col1.image(healthy_img, use_column_width=True)
+
+fractured_img = Image.open("Images/fractured_bones_show.jpg")
+#col2.header("Fractured Bones")
+col2.image(fractured_img, width=225)
+
+beyond_repair_img = Image.open("Images/beyond_repair_bones_show.jpg")
+#col2.header("Bones Requiring Prolong treatment Or Beyond Repair")
+col3.image(beyond_repair_img, width=150)
+
+st.markdown("#### Categories of bones inside each class and types of bones on which Deep Learning model has been trained on:")
+categories_img = Image.open("Images/categories.jpg")
+st.image(categories_img, caption="Information on each class", use_column_width=True)
+
+
+st.markdown("#### Please provide the bone url for bone class image classification.")
+st.text("Please provide bone image url from the above mentioned bone categories and types of bones only for prediction.")
 
 # Classes for our prediction
 classification_classes = ["Healthy_bones", "Fractured_bones", "Bones_beyond_repair"]
-classification_classes_dict = {0:"Healthy Bones", 1:"Fractured Bones", 2:"Bones Needing Prolong treatment"}
+classification_classes_dict = {0:"Healthy Bones", 1:"Fractured Bones", 2:"Bones Requiring Prolong treatment Or Beyond Repair"}
 
 EXCEPTIONS = {IOError, FileNotFoundError, exceptions.RequestException, exceptions.HTTPError, exceptions.ConnectionError,
               exceptions.Timeout}
@@ -89,7 +117,13 @@ if image_path is not None:
         st.write("Predicted Bone class: ")
         with st.spinner("Classifying........."):
             bone_class_image, bone_image_class, bone_image_class_probability = predict_image_class(content)
-            st.write(f"The predicted bone class is {bone_image_class} with probability {bone_image_class_probability}%")
+            if bone_image_class_probability > 70:
+                st.success(bone_image_class)
+            elif bone_image_class_probability < 70 and bone_image_class_probability >= 40:
+                st.warning(bone_image_class)
+            else:
+                st.error(bone_image_class)
+            st.write(f"The predicted probability: {bone_image_class_probability}%")
         st.write("")
         st.write("The image requested for classification is: ")
         st.image(bone_class_image, caption="Classifying Bone Image", use_column_width=True)        
