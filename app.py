@@ -1,13 +1,8 @@
 # Import warnings 
 from urllib import request
 import warnings
-# Stopping all warning messages
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-warnings.filterwarnings("ignore")
-
-# Stop debug logs
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+
 
 # Importing all required libraries
 import tensorflow as tf
