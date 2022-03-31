@@ -1,9 +1,7 @@
 keras
-keras_nightly
 matplotlib
 numpy
 Pillow
 requests
 streamlit
 tensorflow
-tf_nightly==2.9.0.dev20220331

@@ -1,7 +1,6 @@
 FROM ubuntu:18.04
 RUN apt upgrade && apt update && apt install -y \
     software-properties-common \
-    python3.8 \
     python3-pip \
     python3-dev  
 RUN ln -s /usr/bin/python3 /usr/bin/python
