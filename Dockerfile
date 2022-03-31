@@ -4,9 +4,9 @@ RUN apt upgrade && apt update && apt install -y \
     python3-pip \
     python3-dev  
 RUN ln -s /usr/bin/python3 /usr/bin/python
-ADD . DEEP-LEARNING-PROJECT/
+ADD . project/
 RUN pip3 install --upgrade pip 
-RUN cd DEEP-LEARNING-PROJECT && pip3 install  --no-cache -r requirements.txt
+RUN cd project && pip3 install  --no-cache -r requirements.txt
 EXPOSE 5000
 ENTRYPOINT ["sh", "-c" ]
-CMD ["cd DEEP-LEARNING-PROJECT/ && chmod +x run.sh && ./run.sh"]
+CMD ["cd project/ && chmod +x run.sh && ./run.sh"]
