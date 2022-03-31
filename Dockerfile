@@ -9,4 +9,4 @@ RUN pip3 install --upgrade pip
 RUN cd DEEP-LEARNING-PROJECT && pip3 install  --no-cache -r requirements.txt
 EXPOSE 5000
 ENTRYPOINT ["sh", "-c" ]
-CMD ["cd DEEP-LEARNING-PROJECT/ && run.sh"]
+CMD ["cd DEEP-LEARNING-PROJECT/ && chmod +x run.sh && ./run.sh"]
