@@ -61,7 +61,7 @@ EXCEPTIONS = {IOError, FileNotFoundError, exceptions.RequestException, exception
 
 @st.cache(allow_output_mutation=True)
 def load_model():
-    cnn_model = tf.keras.models.load_model("Models/Transfer_learning_model_v1.h5", compile=False)
+    cnn_model = tf.keras.models.load_model("Models/Transfer_learning_model_v3_M1.h5", compile=False)
     return cnn_model
 
 with st.spinner("Loading Model Into Memory..........."):
@@ -103,7 +103,7 @@ def predict_image_class(bone_image):
 
 
 # Main program 
-default_bone_image_path = "https://prod-images-static.radiopaedia.org/images/25293630/3a9c605b616de1ed6dd1d2397bc394_jumbo.jpeg"
+default_bone_image_path = "https://www.healthpages.org/wp-content/uploads/hand-x-ray.jpg"
 image_path = st.text_input("Enter Image URL to classify:", default_bone_image_path)
 if image_path is not None:
     try:
