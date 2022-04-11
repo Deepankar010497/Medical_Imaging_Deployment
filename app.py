@@ -48,8 +48,8 @@ categories_img = Image.open("Images/categories.jpg")
 st.image(categories_img, caption="Information on each class", use_column_width=True)
 
 
-st.markdown("#### Please provide the bone url for bone class image classification.")
-st.text("Please provide bone image url from the above mentioned bone categories and types of bones only for prediction.")
+st.markdown("#### Please provide the x-ray bone image url for bone class image classification.")
+st.text("Please provide x-ray bone image url from the above mentioned bone categories and types of bones only for prediction.")
 
 # Classes for our prediction
 classification_classes = ["Healthy_bones", "Fractured_bones", "Bones_beyond_repair"]
@@ -83,7 +83,7 @@ def get_image_data(bone_image, image_resize_value):
     x_ray_image = tf.image.resize(x_ray_image, [img_size, img_size])
     x_ray_image = np.expand_dims(x_ray_image, axis=0)
   except:
-    print("Some error occured in fetching data!")  
+    print("Some error occurred in fetching data!")  
     
   return x_ray_image  
 
@@ -104,7 +104,11 @@ def predict_image_class(bone_image):
 
 # Main program 
 default_bone_image_path = "https://www.healthpages.org/wp-content/uploads/hand-x-ray.jpg"
-image_path = st.text_input("Enter Image URL to classify:", default_bone_image_path)
+try:
+    image_path = st.text_input("Enter Image URL to classify:", default_bone_image_path)
+except:
+    print("Image output not found from the input url! Try again or enter another url.")
+    
 if image_path is not None:
     try:
         st.text("[INFO] fetching: {}".format(image_path))
@@ -125,7 +129,7 @@ if image_path is not None:
     except Exception as e:
         st.text(e)
         if type(e) in EXCEPTIONS:
-            st.text("Error occured in loading image file")
+            st.text("Error occurred in loading image file")
             st.text("[INFO] fetching: {}".format(image_path))
     
     
