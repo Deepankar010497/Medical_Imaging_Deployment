@@ -21,7 +21,9 @@ import re
 # Full Page Layout
 st.set_page_config(layout="wide")
 
-st.title("Bone Class Image Classifier")
+banner = Image.open("Images/banner.jpg")
+st.image(banner, use_column_width=True)
+
 #Add sidebar to the app
 st.sidebar.markdown("### Welcome to my Bone Classifier Web App")
 st.sidebar.markdown("Hi! I am Deepankar. This web app serves purpose of classifying bones into three major categories. This web app is developed keeping in mind for faster screening of medical records for taking further necessary steps. Working in backend is a computer vision deep learning algorithm for serving your purpose. Enjoy!")
@@ -32,22 +34,11 @@ st.markdown("- Bones Needing Prolong Treatment Or Beyond Repair")
 st.markdown("#### Glimpses of each class:")
 
 # Images
-col1, col2, col3 = st.columns(3)
-
-healthy_img = Image.open("Images/healthy_bones.jpg")
-#col1.header("Healthy Bones")
-col1.image(healthy_img, use_column_width=True)
-
-fractured_img = Image.open("Images/fractured_bones.jpg")
-#col2.header("Fractured Bones")
-col2.image(fractured_img, use_column_width=True)
-
-beyond_repair_img = Image.open("Images/beyond_repair_bones.jpg")
-#col2.header("Bones Requiring Prolong treatment Or Beyond Repair")
-col3.image(beyond_repair_img, use_column_width=True)
+bone_categories_img = Image.open("Images/bones_categories.jpg")
+st.image(bone_categories_img, use_column_width=True)
 
 st.markdown("#### Categories of bones inside each class and types of bones on which Deep Learning model has been trained on:")
-categories_img = Image.open("Images/categories.jpg")
+categories_img = Image.open("Images/categories_banner.jpg")
 st.image(categories_img, caption="Information on each class", use_column_width=True)
 
 
